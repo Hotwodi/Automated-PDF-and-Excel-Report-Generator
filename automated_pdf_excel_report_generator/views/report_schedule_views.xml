@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_rgr_report_schedule_tree" model="ir.ui.view">
+        <field name="name">rgr.report.schedule.tree</field>
+        <field name="model">rgr.report.schedule</field>
+        <field name="arch" type="xml">
+            <tree string="Scheduled Reports"
+                  decoration-success="active"
+                  decoration-muted="not active">
+                <field name="name"/>
+                <field name="template_id"/>
+                <field name="cron_expression"/>
+                <field name="next_run"/>
+                <field name="last_run"/>
+                <field name="active" widget="boolean_toggle"/>
+                <field name="delivery_count"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_rgr_report_schedule_form" model="ir.ui.view">
+        <field name="name">rgr.report.schedule.form</field>
+        <field name="model">rgr.report.schedule</field>
+        <field name="arch" type="xml">
+            <form string="Scheduled Report">
+                <header>
+                    <button name="action_run_now" type="object"
+                            string="Run Now" class="oe_highlight"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" placeholder="Schedule name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="template_id"/>
+                            <field name="cron_expression"
+                                   placeholder="0 8 * * *"/>
+                            <field name="email_recipients"
+                                   placeholder="user@example.com, boss@example.com"/>
+                        </group>
+                        <group>
+                            <field name="active"/>
+                            <field name="next_run"/>
+                            <field name="last_run" readonly="1"/>
+                            <field name="delivery_count" readonly="1"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_rgr_report_schedule_search" model="ir.ui.view">
+        <field name="name">rgr.report.schedule.search</field>
+        <field name="model">rgr.report.schedule</field>
+        <field name="arch" type="xml">
+            <search string="Scheduled Reports">
+                <field name="name"/>
+                <field name="template_id"/>
+                <filter name="filter_active" string="Active"
+                        domain="[('active','=',True)]"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_template" string="Template"
+                            context="{'group_by':'template_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_rgr_report_schedule" model="ir.actions.act_window">
+        <field name="name">Scheduled Reports</field>
+        <field name="res_model">rgr.report.schedule</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_rgr_report_schedule_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Schedule your first recurring report
+            </p>
+            <p>Automate deliveries and email reports on a recurring schedule.</p>
+        </field>
+    </record>
+</odoo>

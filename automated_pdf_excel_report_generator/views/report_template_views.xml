@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_rgr_report_template_tree" model="ir.ui.view">
+        <field name="name">rgr.report.template.tree</field>
+        <field name="model">rgr.report.template</field>
+        <field name="arch" type="xml">
+            <tree string="Report Templates">
+                <field name="name"/>
+                <field name="model_name"/>
+                <field name="report_type"/>
+                <field name="schedule"/>
+                <field name="is_active" widget="boolean_toggle"/>
+                <field name="last_generated"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_rgr_report_template_form" model="ir.ui.view">
+        <field name="name">rgr.report.template.form</field>
+        <field name="model">rgr.report.template</field>
+        <field name="arch" type="xml">
+            <form string="Report Template">
+                <header>
+                    <button name="action_generate_report" type="object"
+                            string="Generate Report" class="oe_highlight"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_generate_report" type="object"
+                                string="Generate" class="oe_stat_button"
+                                icon="fa-play"/>
+                    </div>
+                    <widget name="web_ribbon" title="Archived"
+                            bg_color="bg-danger"
+                            invisible="is_active"/>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" placeholder="e.g. Monthly Sales Report"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="model_name" placeholder="e.g. sale.order"/>
+                            <field name="report_type"/>
+                            <field name="schedule"/>
+                        </group>
+                        <group>
+                            <field name="is_active"/>
+                            <field name="last_generated" readonly="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Configuration">
+                            <group>
+                                <field name="group_by" placeholder="e.g. partner_id, date_order"/>
+                                <field name="filter_domain"
+                                       placeholder='[["state","=","sale"]]'/>
+                                <field name="template_config"
+                                       placeholder='{"columns":[{"field":"name","label":"Order"}]}'/>
+                            </group>
+                        </page>
+                        <page string="Jobs" invisible="1">
+                            <field name="job_ids">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="state"/>
+                                    <field name="generated_date"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Schedules">
+                            <field name="schedule_ids">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="next_run"/>
+                                    <field name="active" widget="boolean_toggle"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="History">
+                            <field name="history_ids">
+                                <tree>
+                                    <field name="file_name"/>
+                                    <field name="generated_date"/>
+                                    <field name="download_count"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_rgr_report_template_search" model="ir.ui.view">
+        <field name="name">rgr.report.template.search</field>
+        <field name="model">rgr.report.template</field>
+        <field name="arch" type="xml">
+            <search string="Report Templates">
+                <field name="name"/>
+                <field name="model_name"/>
+                <filter name="active" string="Active"
+                        domain="[('is_active','=',True)]"/>
+                <filter name="archived" string="Archived"
+                        domain="[('is_active','=',False)]"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_report_type" string="Report Type"
+                            context="{'group_by':'report_type'}"/>
+                    <filter name="group_schedule" string="Schedule"
+                            context="{'group_by':'schedule'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_rgr_report_template" model="ir.actions.act_window">
+        <field name="name">Report Templates</field>
+        <field name="res_model">rgr.report.template</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_rgr_report_template_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first report template
+            </p>
+            <p>Define reusable templates that generate PDF, Excel or CSV reports.</p>
+        </field>
+    </record>
+</odoo>

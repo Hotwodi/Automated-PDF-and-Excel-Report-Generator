@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_rgr_report_template_user,rgr.report.template.user,model_rgr_report_template,base.group_user,1,1,1,1
+access_rgr_report_job_user,rgr.report.job.user,model_rgr_report_job,base.group_user,1,1,1,1
+access_rgr_report_schedule_user,rgr.report.schedule.user,model_rgr_report_schedule,base.group_user,1,1,1,1
+access_rgr_report_history_user,rgr.report.history.user,model_rgr_report_history,base.group_user,1,1,1,1

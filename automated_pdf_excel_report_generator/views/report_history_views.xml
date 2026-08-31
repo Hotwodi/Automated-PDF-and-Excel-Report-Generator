@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_rgr_report_history_tree" model="ir.ui.view">
+        <field name="name">rgr.report.history.tree</field>
+        <field name="model">rgr.report.history</field>
+        <field name="arch" type="xml">
+            <tree string="Report History">
+                <field name="name"/>
+                <field name="template_id"/>
+                <field name="job_id"/>
+                <field name="file_name"/>
+                <field name="file_size"/>
+                <field name="generated_date"/>
+                <field name="downloaded_by"/>
+                <field name="download_count"/>
+                <button name="action_download" type="object"
+                        string="Download" icon="fa-download"
+                        invisible="not job_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_rgr_report_history_form" model="ir.ui.view">
+        <field name="name">rgr.report.history.form</field>
+        <field name="model">rgr.report.history</field>
+        <field name="arch" type="xml">
+            <form string="Report History">
+                <header>
+                    <button name="action_download" type="object"
+                            string="Download" class="oe_highlight"
+                            invisible="not job_id"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" readonly="1"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="template_id" readonly="1"/>
+                            <field name="job_id" readonly="1"/>
+                            <field name="file_name" readonly="1"/>
+                            <field name="file_size" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="generated_date" readonly="1"/>
+                            <field name="downloaded_by" readonly="1"/>
+                            <field name="download_count" readonly="1"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_rgr_report_history_search" model="ir.ui.view">
+        <field name="name">rgr.report.history.search</field>
+        <field name="model">rgr.report.history</field>
+        <field name="arch" type="xml">
+            <search string="Report History">
+                <field name="name"/>
+                <field name="template_id"/>
+                <field name="job_id"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_template" string="Template"
+                            context="{'group_by':'template_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_rgr_report_history" model="ir.actions.act_window">
+        <field name="name">Report History</field>
+        <field name="res_model">rgr.report.history</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_rgr_report_history_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No report history yet
+            </p>
+            <p>Every generated report is recorded here for audit and download.</p>
+        </field>
+    </record>
+</odoo>

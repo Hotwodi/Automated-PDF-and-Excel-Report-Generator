@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_rgr_root"
+              name="Report Generator"
+              sequence="20"
+              web_icon="automated_pdf_excel_report_generator,static/description/icon.png"/>
+
+    <menuitem id="menu_rgr_templates"
+              name="Report Templates"
+              parent="menu_rgr_root"
+              sequence="10"
+              action="action_rgr_report_template"/>
+
+    <menuitem id="menu_rgr_jobs"
+              name="Generation Jobs"
+              parent="menu_rgr_root"
+              sequence="20"
+              action="action_rgr_report_job"/>
+
+    <menuitem id="menu_rgr_schedules"
+              name="Scheduled Reports"
+              parent="menu_rgr_root"
+              sequence="30"
+              action="action_rgr_report_schedule"/>
+
+    <menuitem id="menu_rgr_history"
+              name="Report History"
+              parent="menu_rgr_root"
+              sequence="40"
+              action="action_rgr_report_history"/>
+</odoo>
