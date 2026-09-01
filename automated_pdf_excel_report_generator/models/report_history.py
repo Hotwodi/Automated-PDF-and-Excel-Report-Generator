@@ -4,7 +4,7 @@ from odoo import api, fields, models
 class RgrReportHistory(models.Model):
     _name = 'rgr.report.history'
     _description = 'Report History'
-    _inherit = ['mail.thread']
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _order = 'generated_date desc, id desc'
 
     name = fields.Char(string='History Name', required=True, tracking=True)

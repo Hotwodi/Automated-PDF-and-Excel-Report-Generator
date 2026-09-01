@@ -4,7 +4,7 @@ from odoo import api, fields, models
 class RgrReportTemplate(models.Model):
     _name = 'rgr.report.template'
     _description = 'Report Template'
-    _inherit = ['mail.thread']
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _order = 'name'
 
     name = fields.Char(string='Template Name', required=True, tracking=True)

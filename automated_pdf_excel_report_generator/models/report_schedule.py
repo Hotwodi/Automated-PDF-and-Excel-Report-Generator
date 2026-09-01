@@ -4,7 +4,7 @@ from odoo import api, fields, models
 class RgrReportSchedule(models.Model):
     _name = 'rgr.report.schedule'
     _description = 'Scheduled Report'
-    _inherit = ['mail.thread']
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _order = 'next_run'
 
     name = fields.Char(string='Schedule Name', required=True, tracking=True)

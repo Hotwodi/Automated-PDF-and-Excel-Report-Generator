@@ -9,7 +9,7 @@ from odoo import api, fields, models
 class RgrReportJob(models.Model):
     _name = 'rgr.report.job'
     _description = 'Report Generation Job'
-    _inherit = ['mail.thread']
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _order = 'generated_date desc, id desc'
 
     name = fields.Char(string='Job Name', required=True, tracking=True)
