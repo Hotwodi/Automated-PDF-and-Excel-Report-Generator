@@ -13,7 +13,7 @@ or CSV output on demand, and schedule recurring deliveries by email.
     'website': 'https://softaidev.pages.dev',
     'category': 'Productivity/AI',
     'license': 'LGPL-3',
-    'price': 40.00,
+    'price': 39.99,
     'currency': 'USD',
     'depends': ['base', 'web', 'mail'],
     'application': True,
